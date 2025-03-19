@@ -140,7 +140,7 @@
 ## Результаты вайбкодинга:
 - Приложение для списков совместных покупок: [Re:List](https://relistapp.app/)
 - История-квиз:  [Снег идет...](https://snow.tobeproduct.ru/)
-- Визуализация физической задачи для поста в ТГ:  [Шары продакта](https://balls.tobeproduct.ru/)
+- Визуализация физической задачи для поста в ТГ:  [Let's run some balls](https://balls.tobeproduct.ru/)
 - Темплейт и инструкция для начала вайбкодинга: [vibecoding.cc](https://vibecoding.cc/)
 - Этот проект на гитхабе: [Vibecoding Slides](https://github.com/anton-g-kulikov/vibecoding-slides)
 

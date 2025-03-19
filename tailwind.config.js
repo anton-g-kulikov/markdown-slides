@@ -3,6 +3,8 @@ module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
+    "./styles/**/*.css", // updated glob pattern for styles directory
+    "./app/**/*.{js,ts,jsx,tsx}", // Include app directory if you use Next.js 13’s app dir
   ],
   theme: {
     extend: {

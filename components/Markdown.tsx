@@ -1,4 +1,4 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
@@ -17,21 +17,24 @@ const Markdown: React.FC<MarkdownProps> = ({ content }) => {
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeRaw, rehypeSanitize]}
         components={{
-          code({ node, inline, className, children, ...props }) {
+          code({ node, className, children, ...props }) {
             const match = /language-(\w+)/.exec(className || "");
-            return !inline && match ? (
+            // Remove the ref from props to avoid the ref forwarding issue
+            const { ref, ...restProps } = props;
+
+            return !match ? (
+              <code className={className} {...restProps}>
+                {children}
+              </code>
+            ) : (
               <SyntaxHighlighter
-                style={vscDarkPlus}
+                style={vscDarkPlus as any}
                 language={match[1]}
                 PreTag="div"
-                {...props}
+                {...restProps}
               >
                 {String(children).replace(/\n$/, "")}
               </SyntaxHighlighter>
-            ) : (
-              <code className={className} {...props}>
-                {children}
-              </code>
             );
           },
         }}

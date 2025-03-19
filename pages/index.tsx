@@ -45,10 +45,10 @@ export default function Home() {
       </Head>
       <main className="flex min-h-screen flex-col items-center justify-center p-6 md:p-24 bg-gray-900 text-white">
         <h1 className="text-4xl md:text-5xl font-bold mb-6 text-center bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-          Welcome to VibeCoding Slides
+          Welcome to Markdown Slides
         </h1>
         <p className="text-xl mb-12 text-gray-300 text-center">
-          Start creating your interactive presentations
+          Turn your .md files into nice and simple presentations
         </p>
 
         <div className="w-full max-w-4xl">
