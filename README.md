@@ -115,38 +115,96 @@ When viewing a presentation:
 
 #### SlideRenderer (`/components/SlideRenderer.tsx`)
 
-The core component responsible for presentation functionality:
+Core component that powers the presentation experience:
 
-- Fetches and parses markdown content from the specified path
-- Splits content into individual slides at each horizontal rule (`---`)
-- Manages slide navigation state (current slide index)
-- Handles keyboard navigation (arrow keys and spacebar)
-- Renders the current slide with proper formatting
-- Displays navigation controls and slide position
+- **Props**:
+  - `markdownPath`: Path to the markdown file to render
+  - `title` (optional): Presentation title override
+- **State Management**:
+  - Manages slide content array and current slide index
+  - Tracks loading state and presentation title
+- **Functionality**:
+  - Asynchronously fetches markdown from the provided path
+  - Parses content by splitting at horizontal rules (`---`)
+  - Auto-extracts title from the first slide's H1 heading if not provided
+  - Provides navigation methods (next/previous slide)
+  - Implements keyboard navigation (arrow keys, spacebar)
+- **UI Structure**:
+  - Renders a fixed title bar at the top
+  - Displays current slide content in the center area
+  - Shows navigation controls at the bottom
+  - Provides loading and error states
+
+#### SlideNavigation (`/components/SlideNavigation.tsx`)
+
+Navigation controls component for presentations:
+
+- **Props**:
+  - `currentSlideIndex`: Current slide number
+  - `totalSlides`: Total slides in the presentation
+  - `goToPreviousSlide`: Function to navigate to previous slide
+  - `goToNextSlide`: Function to navigate to next slide
+- **Functionality**:
+  - Renders navigation buttons (Previous/Next)
+  - Shows current slide position (e.g., "2 / 10")
+  - Includes a "Home" button to return to the main page
+  - Handles Escape key press to return to homepage
+- **UI Structure**:
+  - Fixed position bar at the bottom of the screen
+  - Contains navigation buttons and slide counter
 
 #### Markdown Renderer (`/components/Markdown.tsx`)
 
 Transforms markdown content into styled HTML:
 
 - Uses `react-markdown` to parse markdown syntax
-- Applies syntax highlighting to code blocks
-- Supports GitHub Flavored Markdown features
-- Handles HTML content with appropriate sanitization
+- Applies syntax highlighting to code blocks via `react-syntax-highlighter`
+- Supports GitHub Flavored Markdown features via `remark-gfm`
+- Handles HTML content with appropriate sanitization using `rehype-sanitize`
+- Provides custom styling for different markdown elements
+
+#### API: Presentations Handler (`/pages/api/presentations.ts`)
+
+Backend API endpoint that provides presentation metadata:
+
+- **Functionality**:
+  - Scans the `/public/slides` directory for markdown files
+  - Extracts metadata from each presentation:
+    - `slug`: Filename without extension
+    - `title`: Extracted from first H1 heading in the file
+    - `path`: Path to the markdown file
+  - Returns the presentation list as JSON
+- **Error Handling**:
+  - Gracefully handles missing directories
+  - Provides empty array if no presentations exist
 
 #### Dynamic Slide Routes (`/pages/slides/[slug].tsx`)
 
 Handles dynamic routing for presentations:
 
-- Extracts the slug parameter from the URL
-- Constructs the path to the corresponding markdown file
-- Passes the path to the SlideRenderer component
+- **Functionality**:
+  - Extracts the `slug` parameter from the URL
+  - Constructs the path to the corresponding markdown file (`/slides/${slug}.md`)
+  - Passes the path to the SlideRenderer component
+  - Handles loading state when slug is not yet available
+- **Implementation**:
+  - Uses Next.js dynamic routing with `useRouter`
+  - Simple wrapper around the SlideRenderer with path construction
 
 #### Homepage (`/pages/index.tsx`)
 
 Lists all available presentations:
 
-- Scans the `/public/slides` directory for markdown files
-- Displays each presentation with its title and a link
+- **Data Fetching**:
+  - Makes API call to `/api/presentations` endpoint
+  - Retrieves list of available presentations with metadata
+- **UI Structure**:
+  - Displays page title and introduction
+  - Shows clickable cards for each presentation
+  - Links each card to its dynamic route (`/slides/[slug]`)
+- **Styling**:
+  - Responsive grid layout for presentation cards
+  - Visual feedback for interactive elements
 
 #### Example Presentation (`/pages/test-presentation.tsx`)
 
@@ -162,10 +220,12 @@ A sample implementation showcasing how to:
 ├── components/           # Reusable React components
 │   ├── Markdown.tsx      # Markdown rendering with syntax highlighting
 │   ├── SlideRenderer.tsx # Core presentation functionality
+│   ├── SlideNavigation.tsx # Navigation controls for presentations
 │   └── ...
 ├── pages/                # Next.js pages and routes
 │   ├── index.tsx         # Homepage with presentation listing
 │   ├── slides/[slug].tsx # Dynamic route for presentations
+│   ├── api/presentations.ts # API endpoint for presentation metadata
 │   └── ...
 ├── public/               # Static assets
 │   ├── slides/           # Markdown presentation files
