@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { useRouter } from "next/router";
+import React from "react";
 
 interface SlideNavigationProps {
   currentSlideIndex: number;
@@ -14,50 +13,26 @@ const SlideNavigation: React.FC<SlideNavigationProps> = ({
   goToPreviousSlide,
   goToNextSlide,
 }) => {
-  const router = useRouter();
-
-  const goHome = () => {
-    router.push("/");
-  };
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        goHome();
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
-
   return (
-    <div className="slide-controls fixed bottom-0 left-0 right-0 flex justify-between items-center p-4 bg-gray-100 border-t border-gray-200">
+    <div className="flex justify-between items-center p-4">
       <button
         onClick={goToPreviousSlide}
         disabled={currentSlideIndex === 0}
-        className="px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-300"
+        className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition disabled:bg-gray-600 disabled:cursor-not-allowed"
       >
         Previous
       </button>
 
-      <div className="slide-progress text-center">
+      <div className="slide-progress text-center font-medium">
         {currentSlideIndex + 1} / {totalSlides}
       </div>
 
       <button
         onClick={goToNextSlide}
         disabled={currentSlideIndex === totalSlides - 1}
-        className="px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-300"
+        className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition disabled:bg-gray-600 disabled:cursor-not-allowed"
       >
         Next
-      </button>
-
-      <button
-        onClick={goHome}
-        className="px-4 py-2 bg-gray-500 text-white rounded ml-4"
-      >
-        Home
       </button>
     </div>
   );

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Markdown from "./Markdown";
 import SlideNavigation from "./SlideNavigation";
+import TitleBar from "./TitleBar";
+import { useRouter } from "next/router";
 
 interface SlideRendererProps {
   markdownPath: string;
@@ -15,6 +17,11 @@ const SlideRenderer: React.FC<SlideRendererProps> = ({
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [loading, setLoading] = useState(true);
   const [slideTitle, setSlideTitle] = useState(title || "Presentation");
+  const router = useRouter();
+
+  const goHome = () => {
+    router.push("/");
+  };
 
   useEffect(() => {
     const fetchMarkdown = async () => {
@@ -62,6 +69,8 @@ const SlideRenderer: React.FC<SlideRendererProps> = ({
         goToNextSlide();
       } else if (e.key === "ArrowLeft") {
         goToPreviousSlide();
+      } else if (e.key === "Escape") {
+        goHome();
       }
     };
 
@@ -71,26 +80,24 @@ const SlideRenderer: React.FC<SlideRendererProps> = ({
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-screen">
-        Loading...
+      <div className="flex items-center justify-center h-screen bg-gray-900 text-white">
+        <div className="animate-pulse text-xl font-semibold">Loading...</div>
       </div>
     );
   }
 
   if (slides.length === 0) {
     return (
-      <div className="flex items-center justify-center h-screen">
-        No slides found
+      <div className="flex items-center justify-center h-screen bg-gray-900 text-white">
+        <div className="text-xl font-semibold">No slides found</div>
       </div>
     );
   }
 
   return (
-    <div className="slide-container h-screen flex flex-col">
+    <div className="slide-container h-screen flex flex-col bg-gray-900">
       {/* Title bar that's always visible */}
-      <div className="slide-title fixed top-0 left-0 right-0 p-4 bg-gray-800 text-white text-center shadow-md">
-        <h1 className="text-xl font-bold">{slideTitle}</h1>
-      </div>
+      <TitleBar title={slideTitle} />
 
       {/* Main content area with padding to avoid overlap with header and footer */}
       <div className="slide-content flex-1 p-8 pt-20 pb-20 flex items-center justify-center overflow-auto">
@@ -98,12 +105,14 @@ const SlideRenderer: React.FC<SlideRendererProps> = ({
       </div>
 
       {/* Navigation controls at the bottom */}
-      <SlideNavigation
-        currentSlideIndex={currentSlideIndex}
-        totalSlides={slides.length}
-        goToPreviousSlide={goToPreviousSlide}
-        goToNextSlide={goToNextSlide}
-      />
+      <div className="slide-navigation fixed bottom-0 left-0 right-0 bg-gray-800 text-white shadow-lg z-10">
+        <SlideNavigation
+          currentSlideIndex={currentSlideIndex}
+          totalSlides={slides.length}
+          goToPreviousSlide={goToPreviousSlide}
+          goToNextSlide={goToNextSlide}
+        />
+      </div>
     </div>
   );
 };
