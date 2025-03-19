@@ -81,47 +81,6 @@ Each markdown file follows this structure:
 1. **First line**: Use a level-1 heading for the presentation title
 2. **Slides**: Separate individual slides using horizontal rules (`---`)
 
-Example presentation file:
-
-```markdown
-# Introduction to React Hooks
-
-## What are React Hooks?
-
-React Hooks are functions that let you "hook into" React state and lifecycle features from function components.
-
----
-
-## useState Hook
-
-```jsx
-function Counter() {
-  const [count, setCount] = useState(0);
-  
-  return (
-    <div>
-      <p>You clicked {count} times</p>
-      <button onClick={() => setCount(count + 1)}>
-        Click me
-      </button>
-    </div>
-  );
-}
-```
-
----
-
-## useEffect Hook
-
-For side effects in your components:
-
-```jsx
-useEffect(() => {
-  document.title = `You clicked ${count} times`;
-}, [count]); // Only re-run if count changes
-```
-```
-
 ### Markdown Features
 
 Your slides support:
