@@ -1,4 +1,4 @@
-# Welcome to VibeCoding Slides
+# Example Slides
 
 This is the first slide with an introduction.
 

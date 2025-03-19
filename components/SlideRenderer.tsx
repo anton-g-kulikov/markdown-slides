@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from "react";
 import Markdown from "./Markdown";
+import SlideNavigation from "./SlideNavigation";
 
 interface SlideRendererProps {
   markdownPath: string;
+  title?: string;
 }
 
-const SlideRenderer: React.FC<SlideRendererProps> = ({ markdownPath }) => {
+const SlideRenderer: React.FC<SlideRendererProps> = ({
+  markdownPath,
+  title,
+}) => {
   const [slides, setSlides] = useState<string[]>([]);
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [slideTitle, setSlideTitle] = useState(title || "Presentation");
 
   useEffect(() => {
     const fetchMarkdown = async () => {
@@ -20,6 +26,14 @@ const SlideRenderer: React.FC<SlideRendererProps> = ({ markdownPath }) => {
         // Split the markdown by horizontal rules (---) to get individual slides
         const slideContent = markdown.split(/\n---\n/);
         setSlides(slideContent);
+
+        // Try to extract title from first slide if not provided
+        if (!title) {
+          const firstSlideTitle = slideContent[0].match(/^#\s+(.+)/m);
+          if (firstSlideTitle && firstSlideTitle[1]) {
+            setSlideTitle(firstSlideTitle[1]);
+          }
+        }
       } catch (error) {
         console.error("Error loading slides:", error);
       } finally {
@@ -28,7 +42,7 @@ const SlideRenderer: React.FC<SlideRendererProps> = ({ markdownPath }) => {
     };
 
     fetchMarkdown();
-  }, [markdownPath]);
+  }, [markdownPath, title]);
 
   const goToNextSlide = () => {
     if (currentSlideIndex < slides.length - 1) {
@@ -73,31 +87,23 @@ const SlideRenderer: React.FC<SlideRendererProps> = ({ markdownPath }) => {
 
   return (
     <div className="slide-container h-screen flex flex-col">
-      <div className="slide-content flex-1 p-8 flex items-center justify-center">
+      {/* Title bar that's always visible */}
+      <div className="slide-title fixed top-0 left-0 right-0 p-4 bg-gray-800 text-white text-center shadow-md">
+        <h1 className="text-xl font-bold">{slideTitle}</h1>
+      </div>
+
+      {/* Main content area with padding to avoid overlap with header and footer */}
+      <div className="slide-content flex-1 p-8 pt-20 pb-20 flex items-center justify-center overflow-auto">
         <Markdown content={slides[currentSlideIndex]} />
       </div>
 
-      <div className="slide-controls flex justify-between p-4 bg-gray-100">
-        <button
-          onClick={goToPreviousSlide}
-          disabled={currentSlideIndex === 0}
-          className="px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-300"
-        >
-          Previous
-        </button>
-
-        <div className="slide-progress">
-          {currentSlideIndex + 1} / {slides.length}
-        </div>
-
-        <button
-          onClick={goToNextSlide}
-          disabled={currentSlideIndex === slides.length - 1}
-          className="px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-300"
-        >
-          Next
-        </button>
-      </div>
+      {/* Navigation controls at the bottom */}
+      <SlideNavigation
+        currentSlideIndex={currentSlideIndex}
+        totalSlides={slides.length}
+        goToPreviousSlide={goToPreviousSlide}
+        goToNextSlide={goToNextSlide}
+      />
     </div>
   );
 };

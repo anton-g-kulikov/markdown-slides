@@ -82,7 +82,6 @@ export default function Home() {
                   <h3 className="text-xl font-semibold">
                     {presentation.title}
                   </h3>
-                  <p className="text-gray-600">Click to view presentation</p>
                 </li>
               ))}
             </ul>
