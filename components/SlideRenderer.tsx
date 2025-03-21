@@ -28,6 +28,15 @@ const SlideRenderer: React.FC<SlideRendererProps> = ({
       try {
         // Fetch the markdown file
         const response = await fetch(markdownPath);
+
+        if (!response.ok) {
+          console.error(
+            `HTTP error: ${response.status} ${response.statusText}`
+          );
+          setLoading(false);
+          return;
+        }
+
         const markdown = await response.text();
 
         // Split the markdown by horizontal rules (---) to get individual slides
@@ -80,7 +89,10 @@ const SlideRenderer: React.FC<SlideRendererProps> = ({
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-screen bg-gray-900 text-white">
+      <div
+        className="flex items-center justify-center h-screen bg-gray-900 text-white"
+        data-cy="loading-state"
+      >
         <div className="animate-pulse text-xl font-semibold">Loading...</div>
       </div>
     );
@@ -88,19 +100,28 @@ const SlideRenderer: React.FC<SlideRendererProps> = ({
 
   if (slides.length === 0) {
     return (
-      <div className="flex items-center justify-center h-screen bg-gray-900 text-white">
+      <div
+        className="flex items-center justify-center h-screen bg-gray-900 text-white"
+        data-cy="no-slides"
+      >
         <div className="text-xl font-semibold">No slides found</div>
       </div>
     );
   }
 
   return (
-    <div className="slide-container h-screen flex flex-col bg-gray-900">
+    <div
+      className="slide-container h-screen flex flex-col bg-gray-900"
+      data-cy="slide-container"
+    >
       {/* Title bar that's always visible */}
       <TitleBar title={slideTitle} />
 
       {/* Main content area with padding to avoid overlap with header and footer */}
-      <div className="slide-content flex-1 p-8 pt-20 pb-20 flex items-center justify-center overflow-auto">
+      <div
+        className="slide-content flex-1 p-8 pt-20 pb-20 flex items-center justify-center overflow-auto"
+        data-cy="slide-content"
+      >
         <Markdown content={slides[currentSlideIndex]} />
       </div>
 

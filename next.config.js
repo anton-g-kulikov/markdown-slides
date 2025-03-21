@@ -24,6 +24,23 @@ const nextConfig = {
 
   // Custom domain configuration
   assetPrefix: "",
+
+  webpack: (config, { isServer }) => {
+    // Handle ESM packages
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        module: false,
+      };
+    }
+
+    return config;
+  },
+  // Add support for ESM modules
+  experimental: {
+    esmExternals: "loose",
+  },
 };
 
 module.exports = nextConfig;

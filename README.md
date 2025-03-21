@@ -1,10 +1,10 @@
-# VibeCoding Slides
+# Markdown Slides
 
 A modern slide presentation platform built with Next.js, designed for creating and sharing interactive coding presentations.
 
 ## Overview
 
-VibeCoding Slides allows developers and educators to create engaging slide presentations that can include live code examples, interactive elements, and seamless navigation. Built with modern web technologies for optimal performance and user experience.
+Markdown Slides allows developers and educators to create engaging slide presentations that can include live code examples, interactive elements, and seamless navigation. Built with modern web technologies for optimal performance and user experience.
 
 ## Features
 
