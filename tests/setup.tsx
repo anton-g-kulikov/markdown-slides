@@ -1,3 +1,4 @@
+import { vi } from 'vitest';
 import "@testing-library/jest-dom";
 
 // Make sure global.fetch is available in tests
