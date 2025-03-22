@@ -63,6 +63,69 @@ npm run dev
 yarn dev
 ```
 
+## Testing
+
+The project includes a comprehensive testing suite built with Vitest, React Testing Library, and Cypress to ensure code quality and reliability.
+
+### Test Architecture
+
+Our testing strategy follows the testing trophy approach with:
+
+- **Unit Tests**: Testing individual components in isolation
+- **Integration Tests**: Testing interactions between components
+- **Functional Tests**: Testing complete features and workflows
+- **End-to-End Tests**: Using Cypress to test complete user journeys
+
+### Running Tests
+
+```bash
+# Run all unit and integration tests
+npm run test
+
+# Run tests in watch mode
+npm run test:watch
+
+# Run end-to-end tests with Cypress
+npm run test:e2e
+
+# Open Cypress test runner for interactive testing
+npm run cypress:open
+```
+
+### Test Structure
+
+Tests are organized in the following directories:
+
+```
+tests/
+├── api/                 # API utilities tests
+├── components/          # Component tests
+├── pages/               # Page component tests
+├── utils/               # Test utilities
+│   ├── custom-queries.ts  # Custom RTL queries
+│   └── test-utils.tsx     # Test rendering utilities
+├── setup.tsx            # Global test setup
+└── vitest-setup.ts      # Vitest configuration
+```
+
+### Key Testing Features
+
+- **Custom Test Queries**: Support for both `data-testid` and `data-cy` attributes
+- **Mock Data**: Predefined mock data for presentations and markdown content
+- **Error Handling**: Tests for various error scenarios and edge cases
+- **Accessibility Testing**: Tests for keyboard navigation and ARIA attributes
+- **Isolated Component Tests**: Components tested in isolation with mocked dependencies
+
+### Coverage Reports
+
+Generate test coverage reports with:
+
+```bash
+npm run test:coverage
+```
+
+This will output a detailed coverage report showing which parts of the codebase are well-tested and which might need additional test coverage.
+
 ## Creating Presentations
 
 ### File Structure
@@ -262,3 +325,7 @@ A sample implementation showcasing how to:
 4. Run tests with `npm run test` to ensure functionality
 5. Deploy to Firebase with `npm run deploy` after building
 6. Update styles to customize the look and feel
+
+![Part of my current README.md file](/assets/guide/Screenshot_2024-12-10_at_10.57.54.png)
+
+![The actual app looks… somewhat the same](/assets/guide/Screenshot_2024-12-10_at_10.58.56.png)

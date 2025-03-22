@@ -15,9 +15,8 @@ Tag: products
 Lean and agile mindsets. Willingness to learn. A lot of spare time. Patience, grit, perseverance.
 
 > Do your product discovery first.
-> 
 
-Only after deciding to *actually* build something, invest in tools:
+Only after deciding to _actually_ build something, invest in tools:
 
 [March 2024]
 
@@ -39,15 +38,15 @@ Define your product vision (one sentence) and feature set (the shortest list pos
 
 Stay lean and prepare to act agile.
 
-Ask the Chat to memorize this description. Save it in the text file (you will need it later). This also starts the habit of *self-produced documentation.*
+Ask the Chat to memorize this description. Save it in the text file (you will need it later). This also starts the habit of _self-produced documentation._
 
-![Part of my current README.md file](How%20to%20develop%20your%20%E2%80%9Cpet%20project%E2%80%9D%20using%20the%20power%20%2015610a3cc9d080e384f2c2a6554c1de8/Screenshot_2024-12-10_at_10.57.54.png)
+![Part of my current README.md file](/assets/guide/Screenshot_2024-12-10_at_10.57.54.png)
 
 Part of my current README.md file
 
 Prepare mockups of key screens and functions. Rough sketches will be enough. Don’t waste your time polishing high-fidelity mockups – it’s a rabbit hole down to a procrastination valley, don’t follow that path.
 
-![The actual app looks… somewhat the same](How%20to%20develop%20your%20%E2%80%9Cpet%20project%E2%80%9D%20using%20the%20power%20%2015610a3cc9d080e384f2c2a6554c1de8/Screenshot_2024-12-10_at_10.58.56.png)
+![The actual app looks… somewhat the same](/assets/guide/Screenshot_2024-12-10_at_10.58.56.png)
 
 The actual app looks… somewhat the same
 
@@ -55,15 +54,15 @@ The actual app looks… somewhat the same
 
 ## Step 2. Define technologies and plan development
 
-Ask the Chat to *memorize* that *you aren’t a developer* and ask them to *explain any suggestions in detailed but simple language*.
+Ask the Chat to _memorize_ that _you aren’t a developer_ and ask them to _explain any suggestions in detailed but simple language_.
 
-Prompt the Chat to *assume the role of an experienced developer* and *make any upcoming suggestions considering the stability of technologies, existing alternatives, and ease of implementation*.
+Prompt the Chat to _assume the role of an experienced developer_ and _make any upcoming suggestions considering the stability of technologies, existing alternatives, and ease of implementation_.
 
 Feed the `4o` your product description and mockups and ask for suggestions for compatible technologies, outlining the pros and cons of each alternative.
 
 Ask the `o1` to review suggested technologies, choose those that fit, taking into consideration product description, and suggest the most robust plan for implementing them.
 
-Read both answers thoroughly (start developing the *habit of slow reading)*. Ask as many questions as you have until you think that you understand all the details. 
+Read both answers thoroughly (start developing the _habit of slow reading)_. Ask as many questions as you have until you think that you understand all the details.
 
 <aside>
 ⏩
@@ -78,7 +77,7 @@ After that go to [vibecoding.cc](https://vibecoding.cc) chose necessary options 
 
 If you are building a native app, your technology choice is minimal. If you are building a PWA or a web-based SaaS, there are many alternatives, so you should really understand their limitations before kickstarting the project. **The poor choice at this stage will be tough to mitigate later.** You will most probably have to restart the whole project. It happened to me twice.
 
-In the technologies list, **pay great attention to a visual components framework** you will be suggested to use. Go to that library website, look at your sketches, understand or define which components you will be using, and read about their features and behavior. 
+In the technologies list, **pay great attention to a visual components framework** you will be suggested to use. Go to that library website, look at your sketches, understand or define which components you will be using, and read about their features and behavior.
 
 If you think a particular library lacks necessary components, doesn’t support expected behavior, or doesn’t look good enough – ask for more suggestions and examine them.
 
@@ -91,7 +90,6 @@ LLMs are trained on the most abundant code samples, hence, established technolog
 ## Step 3. Kickstart the project and build a “pipeline” to production
 
 > This stage aims to get a functional page in the production environment.
-> 
 
 ### Set up project
 
@@ -105,11 +103,11 @@ Follow set up instructions on [vibecoding.cc](http://vibecoding.cc) until you ge
 
 ### Interlude: Copilot – the best $10 you’ll spend this month
 
-From now on, when you work with actual code, it’s more efficient to use Copilot. 
+From now on, when you work with actual code, it’s more efficient to use Copilot.
 
 Install two connected VScode plugins (GitHub Copilot, GitHub Copilot Chat), start your trial, and invest time in watching and understanding onboarding videos the team made. They are short and very useful.
 
-Open the Copilot Chat panel and start using it. Understand how context works and how to add several files or the whole codebase to it. 
+Open the Copilot Chat panel and start using it. Understand how context works and how to add several files or the whole codebase to it.
 
 ![Screenshot 2024-12-08 at 12.29.03.png](How%20to%20develop%20your%20%E2%80%9Cpet%20project%E2%80%9D%20using%20the%20power%20%2015610a3cc9d080e384f2c2a6554c1de8/Screenshot_2024-12-08_at_12.29.03.png)
 
@@ -117,23 +115,21 @@ Pay attention to which model you choose for each request. Since `o1` requests ar
 
 ![Screenshot 2024-12-08 at 12.29.12.png](How%20to%20develop%20your%20%E2%80%9Cpet%20project%E2%80%9D%20using%20the%20power%20%2015610a3cc9d080e384f2c2a6554c1de8/Screenshot_2024-12-08_at_12.29.12.png)
 
-Edit a README.md file in your project, adding your product description, features, behavior, and technologies. Use it as attachment (*add to context*) when asking `o1` to plan the next iteration/feature.
+Edit a README.md file in your project, adding your product description, features, behavior, and technologies. Use it as attachment (_add to context_) when asking `o1` to plan the next iteration/feature.
 
 ---
 
 > The second goal of this stage is to set up a pipeline for pushing changes and seeing them in the production environment.
-> 
 
 ### Push to production
 
 Follow instructions on setting up firebase deploy and GitHub actions, so on each commit to your repository your changes are pushed to production.
 
 > If you encounter any problems at this stage – ask `4o` for help. You don’t need to spend limits on `o1` queries on simple stuff. Use `o1` only when you need to review, plan, and refactor. Or when encountering complex bugs and implementing complex behavior. If you are doing everything according to the principles of this guide, such occasions should be pretty rare.
-> 
 
 Make the slightest change possible on the page you already have (edit any sentence) and merge and commit. Check if your changes are visible on your domain.
 
-Ask `o1` how to ensure *end users get an updated version of the product*, when changes you are making will be pushed into a production environment. This is how you will learn about caching and version management.
+Ask `o1` how to ensure _end users get an updated version of the product_, when changes you are making will be pushed into a production environment. This is how you will learn about caching and version management.
 
 Implement necessary techniques and bump the version before pushing the commit. Deploy to production.
 
@@ -175,15 +171,15 @@ Fourth, slowest and most useful option, if you really want to understand what’
 
 ### Interlude: Fixing code with LLMs
 
-If you are using modern language like Typescript, the Problems panel is your best friend. 
+If you are using modern language like Typescript, the Problems panel is your best friend.
 
-After each code change, pay attention to this panel, notice newly appeared errors and don’t be shy of using “Fix using Copilot” option. 
+After each code change, pay attention to this panel, notice newly appeared errors and don’t be shy of using “Fix using Copilot” option.
 
 ![Screenshot 2024-12-10 at 08.49.24.png](How%20to%20develop%20your%20%E2%80%9Cpet%20project%E2%80%9D%20using%20the%20power%20%2015610a3cc9d080e384f2c2a6554c1de8/Screenshot_2024-12-10_at_08.49.24.png)
 
 ![Screenshot 2024-12-10 at 08.52.02.png](How%20to%20develop%20your%20%E2%80%9Cpet%20project%E2%80%9D%20using%20the%20power%20%2015610a3cc9d080e384f2c2a6554c1de8/Screenshot_2024-12-10_at_08.52.02.png)
 
-The biggest threat at this point is that Copilot might use the most simple, direct and *wrong* way of handling the problem. This will happen because of the lack of the context.
+The biggest threat at this point is that Copilot might use the most simple, direct and _wrong_ way of handling the problem. This will happen because of the lack of the context.
 
 Two ways to deal with that are: “Explain” and “/fix” commands.
 
@@ -197,11 +193,11 @@ This is how the typical situation looks like: I’ve selected the erroneous part
 
 ![Screenshot 2024-12-10 at 08.56.53.png](How%20to%20develop%20your%20%E2%80%9Cpet%20project%E2%80%9D%20using%20the%20power%20%2015610a3cc9d080e384f2c2a6554c1de8/Screenshot_2024-12-10_at_08.56.53.png)
 
-This time the `o1-preview`  is selected, and you should already understand why for such easy case it is unnecessary.
+This time the `o1-preview` is selected, and you should already understand why for such easy case it is unnecessary.
 
 ![Screenshot 2024-12-10 at 08.57.27.png](How%20to%20develop%20your%20%E2%80%9Cpet%20project%E2%80%9D%20using%20the%20power%20%2015610a3cc9d080e384f2c2a6554c1de8/Screenshot_2024-12-10_at_08.57.27.png)
 
-After Copilot produced the code, *read it slowly*, understand each suggestion and implement them by [choosing one of the options](https://www.notion.so/How-to-develop-your-pet-project-using-the-power-of-LLMs-A-practical-guide-for-PMs-and-other-non-c-15610a3cc9d080e384f2c2a6554c1de8?pvs=21).
+After Copilot produced the code, _read it slowly_, understand each suggestion and implement them by [choosing one of the options](https://www.notion.so/How-to-develop-your-pet-project-using-the-power-of-LLMs-A-practical-guide-for-PMs-and-other-non-c-15610a3cc9d080e384f2c2a6554c1de8?pvs=21).
 
 **Your code is ready to be deployed only when there are no Problems.** The tricky thing is that errors are displayed in the Problems panel only for files that are opened or directly affected by your recent changes.
 
@@ -214,7 +210,6 @@ If the Copilot suggest you to change the name of your function and include some 
 You can spend sometime implementing LLMs suggestions blindly, but at some point they won’t understand context, will decide to reimplement something already existing or just drop something that you already have in our code out of the new version of the same file. You’ll have to catch that as soon as it happens. **You have to be diligent in that regard. To some people, this point defeats the whole purpose.**
 
 > As long as a model can’t hold the whole context of your app (ideas, description, code, internal and external dependencies, and the current task) – you have to do that yourself.
-> 
 
 ---
 
@@ -235,9 +230,8 @@ Only after succeding with that, proceed to next stages.
 ## Step 2.2 Develop the ~~first page~~ user authentication process
 
 > This step aims to confirm that the technologies and libraries you’ve chosen – fit.
-> 
 
-At this step, you should have switched to VScode/GitHub Copilot, so return to ChatGTP only when you need to use images as inputs. 
+At this step, you should have switched to VScode/GitHub Copilot, so return to ChatGTP only when you need to use images as inputs.
 
 **Now it’s time to see if the setup you’ve chosen works for your particular task**. The easiest way to do that is to start by developing user authorization process. It might sound counter-intuitive for a product manager (since it doesn’t directly connected with actual value of your product), but, please, read the following rationale.
 
@@ -255,7 +249,7 @@ An imitation of the end result of this step. Yours should be even simpler.
 
 That will be an actual hard evidence if you should continue down this path at all. Believe me, it’s soul crashing to spend hours building you “actual” product (or rather it’s visual representation), and ending up not understanding how to bring it to live (btw, you will most definitely need user auth as part of that). So, always start with something actually working, even if it’s not visually appealing or “valuable” – if you will need it later, and you can polish it later, if you keep going at all. Here is when your grit and perseverance comes in handy.
 
-As always, ask `o1` to produce a comprehensive plan first. Read it, ask questions. 
+As always, ask `o1` to produce a comprehensive plan first. Read it, ask questions.
 
 The ever going loop of “think-change–fix–check–fix…deploy–check–fix–…” starts here (and never ends, it could be only halted).
 
@@ -283,17 +277,16 @@ Two practical advices here:
 
 # Stage 3. Follow the plan, step by step. Get feedback early
 
-Remember the readme file you’ve compiled early? What are the actual steps written in it? 
+Remember the readme file you’ve compiled early? What are the actual steps written in it?
 Have you divided your product into sizable pieces?
 
 My point here is simple: build your product by small, but usable increments. If you can use something yourself, ask someone to use it as well. Here their feedback, you will be surprised.
 
-The early you start showing `0.2` or `0.3` versions of your product to actual potential users, the quicker you learn. And you will learn a lot. 
+The early you start showing `0.2` or `0.3` versions of your product to actual potential users, the quicker you learn. And you will learn a lot.
 
 > After being a product manager for well over a decade, I cannot express how fresh was the feeling of putting something half-baked in the open and immediately hearing actual unfiltered feedback.
-> 
 
-This problem is well known, but rarely really understood until experienced personally: *you actually fall in love with your ideas*, and you are so blinded by them, you can’t see their weaknesses. Even if those weaknesses can be described as “subjective” – if you build your product for people out there – bring your product to people out there. This is truly the only way to get a feedback from reality – which should be your utmost priority at any point.
+This problem is well known, but rarely really understood until experienced personally: _you actually fall in love with your ideas_, and you are so blinded by them, you can’t see their weaknesses. Even if those weaknesses can be described as “subjective” – if you build your product for people out there – bring your product to people out there. This is truly the only way to get a feedback from reality – which should be your utmost priority at any point.
 
 So, now, after building and successfully using user authorization, start by implementing the most basic feature there is in your product. This will be the second, not biggest, but probably most important hump in your journey.
 
@@ -303,7 +296,7 @@ If you overcome it, the sky is the limit.
 
 # Stage 4. Pre-release: proper refactoring & optimizations
 
-If you reach this stage, it’s time to set up a dedicated staging environment, feature flags, and beta users program. You can even decide to conduct a *proper* code refactoring.
+If you reach this stage, it’s time to set up a dedicated staging environment, feature flags, and beta users program. You can even decide to conduct a _proper_ code refactoring.
 
 At this point, you should be skillful enough that you don’t need my instructions on how to set up all of that.
 
