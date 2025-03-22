@@ -5,13 +5,13 @@ import { getAuth } from "firebase/auth";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDik2dGsBUEWVUayHqXvroG_eMoaJqgixs",
-  authDomain: "markdown-slides-7099a.firebaseapp.com",
-  projectId: "markdown-slides-7099a",
-  storageBucket: "markdown-slides-7099a.firebasestorage.app",
-  messagingSenderId: "800206620914",
-  appId: "1:800206620914:web:0d9e38200f34337c4a286b",
-  measurementId: "G-L0PQV17YR7"
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || "",
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN || "",
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || "",
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET || "",
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID || "",
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID || "",
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID || "",
 };
 
 // Initialize Firebase

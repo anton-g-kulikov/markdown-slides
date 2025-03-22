@@ -14,7 +14,6 @@
 
 # Production
 /dist
-/lib/firebase.ts
 
 # Environment variables
 .env
@@ -22,6 +21,7 @@
 .env.development.local
 .env.test.local
 .env.production.local
+.env.example
 
 # Firebase
 .firebase/
