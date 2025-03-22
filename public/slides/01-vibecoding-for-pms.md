@@ -90,11 +90,12 @@
 # Пререквизиты
 - два монитора )
 - умение работать с терминалом
+- умение работать с менеджерами пакетов (npm)
 - опыт работы с Git, профиль на GitHub
 - английский на уровне B1?
+- $10 за GitHub Copilot, или $20 за Cursor
 
 ---
-
 # Гайд?
 ### [How to develop your “pet project” using the power of LLMs...](https://tobeproduct.notion.site/How-to-develop-your-pet-project-using-the-power-of-LLMs-A-practical-guide-for-PMs-and-other-non-c-15610a3cc9d080e384f2c2a6554c1de8)
 
