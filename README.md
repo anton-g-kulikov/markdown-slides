@@ -37,8 +37,8 @@ Markdown Slides allows developers and educators to create engaging slide present
 1. Clone the repository:
 
    ```
-   git clone https://github.com/your-username/vibecoding-slides.git
-   cd vibecoding-slides
+   git clone https://github.com/your-username/markdown-slides.git
+   cd markdown-slides
    ```
 
 2. Install dependencies:
