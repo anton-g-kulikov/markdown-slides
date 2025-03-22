@@ -325,7 +325,3 @@ A sample implementation showcasing how to:
 4. Run tests with `npm run test` to ensure functionality
 5. Deploy to Firebase with `npm run deploy` after building
 6. Update styles to customize the look and feel
-
-![Part of my current README.md file](/assets/guide/Screenshot_2024-12-10_at_10.57.54.png)
-
-![The actual app looks… somewhat the same](/assets/guide/Screenshot_2024-12-10_at_10.58.56.png)
