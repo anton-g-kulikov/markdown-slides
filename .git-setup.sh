@@ -12,9 +12,9 @@ git remote remove origin
 echo -e "\nPlease enter your GitHub username:"
 read github_username
 
-echo "Please enter the repository name (default: vibecoding-slides):"
+echo "Please enter the repository name (default: markdown-slides):"
 read repo_name
-repo_name=${repo_name:-vibecoding-slides}
+repo_name=${repo_name:-markdown-slides}
 
 # Set up the new origin remote
 echo -e "\nSetting up new origin remote..."
@@ -27,4 +27,4 @@ git remote -v
 echo -e "\nRemote URL has been updated. You can now try:"
 echo "git pull --tags origin master"
 echo "or"
-echo "git push -u origin master"
+echo "git push -u origin main"
