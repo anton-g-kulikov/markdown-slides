@@ -1,51 +1,33 @@
-import React, { CSSProperties, useEffect, useState } from "react";
-import dynamic from "next/dynamic";
+import React from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import dynamic from "next/dynamic";
 
-// Dynamically import ESM modules for non-test environments
+// Dynamically import ReactMarkdown (which is a component)
 const ReactMarkdown = dynamic(() => import("react-markdown"), { ssr: false });
-const remarkGfm = dynamic(() => import("remark-gfm"), { ssr: false });
-const rehypeRaw = dynamic(() => import("rehype-raw"), { ssr: false });
-const rehypeSanitize = dynamic(() => import("rehype-sanitize"), { ssr: false });
 
-interface MarkdownProps {
-  content: string;
-}
+// Don't use dynamic for plugins as they're not React components
+// Instead use a client-side only wrapper component that loads them
+const MarkdownRenderer = ({ content }: { content: string }) => {
+  const [isReady, setIsReady] = React.useState(false);
+  const [remarkPlugins, setRemarkPlugins] = React.useState<any[]>([]);
+  const [rehypePlugins, setRehypePlugins] = React.useState<any[]>([]);
+  const [markdownComponents, setMarkdownComponents] = React.useState<any>(null);
 
-const Markdown: React.FC<MarkdownProps> = ({ content }) => {
-  // Remove the test-conditional synchronous require code and always initialize as empty
-  const [plugins, setPlugins] = useState<any[]>([]);
-  const [rehypePlugins, setRehypePlugins] = useState<any[]>([]);
-
-  useEffect(() => {
+  React.useEffect(() => {
+    // Import plugins only on the client side
     const loadPlugins = async () => {
-      const [remarkGfmModule, rehypeRawModule, rehypeSanitizeModule] =
-        await Promise.all([
+      try {
+        // Import all required plugins
+        const [remarkGfm, rehypeRaw, rehypeSanitize] = await Promise.all([
           import("remark-gfm"),
           import("rehype-raw"),
           import("rehype-sanitize"),
         ]);
-      setPlugins([remarkGfmModule.default]);
-      setRehypePlugins([rehypeRawModule.default, rehypeSanitizeModule.default]);
-    };
-    loadPlugins();
-  }, []);
 
-  if (!plugins.length || !rehypePlugins.length) {
-    return <div>Loading markdown renderer...</div>;
-  }
-
-  return (
-    <div
-      className="markdown-content prose prose-invert max-w-none"
-      data-cy="markdown-content"
-    >
-      <ReactMarkdown
-        remarkPlugins={plugins}
-        rehypePlugins={rehypePlugins}
-        components={{
-          code({ node, className, children, ...props }) {
+        // Create the components object for ReactMarkdown
+        setMarkdownComponents({
+          code({ node, className, children, ...props }: any) {
             const match = /language-(\w+)/.exec(className || "");
             const { ref, ...restProps } = props;
             return !match ? (
@@ -66,13 +48,50 @@ const Markdown: React.FC<MarkdownProps> = ({ content }) => {
               </SyntaxHighlighter>
             );
           },
-          li({ node, children, ...props }) {
+          li({ node, children, ...props }: any) {
             return <li {...props}>{children}</li>;
           },
-        }}
-      >
-        {content}
-      </ReactMarkdown>
+        });
+
+        // Set plugins separately using properly typed state setters
+        setRemarkPlugins([remarkGfm.default]);
+        setRehypePlugins([rehypeRaw.default, rehypeSanitize.default]);
+        setIsReady(true);
+      } catch (error) {
+        console.error("Error loading markdown plugins:", error);
+      }
+    };
+
+    loadPlugins();
+  }, []);
+
+  if (!isReady || !markdownComponents) {
+    return <div className="animate-pulse">Loading markdown...</div>;
+  }
+
+  return (
+    <ReactMarkdown
+      remarkPlugins={remarkPlugins}
+      rehypePlugins={rehypePlugins}
+      components={markdownComponents}
+    >
+      {content}
+    </ReactMarkdown>
+  );
+};
+
+interface MarkdownProps {
+  content: string;
+}
+
+const Markdown: React.FC<MarkdownProps> = ({ content }) => {
+  return (
+    <div
+      className="markdown-content prose prose-invert max-w-none"
+      data-cy="markdown-content"
+      data-testid="markdown-content"
+    >
+      <MarkdownRenderer content={content} />
     </div>
   );
 };

@@ -41,6 +41,11 @@ const nextConfig = {
   experimental: {
     esmExternals: "loose",
   },
+  output: "export",
+  swcMinify: true,
+  images: {
+    unoptimized: true, // Required for static export
+  },
 };
 
 module.exports = nextConfig;

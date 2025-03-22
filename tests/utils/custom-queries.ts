@@ -8,16 +8,20 @@ const queryAllByTestId = (container: HTMLElement, id: string) => {
   );
 };
 
+// The third argument to buildQueries should be a function that formats errors
+const getMultipleError = (c: Element | null, id: string) =>
+  `Found multiple elements with data-testid or data-cy: ${id}`;
+
+const getMissingError = (c: Element | null, id: string) =>
+  `Unable to find an element with testid or data-cy: ${id}`;
+
 const [
   queryByTestId,
   getAllByTestId,
   getByTestId,
   findAllByTestId,
   findByTestId,
-] = buildQueries(
-  queryAllByTestId,
-  (id) => `Unable to find an element with testid or data-cy: ${id}`
-);
+] = buildQueries(queryAllByTestId, getMissingError, getMultipleError);
 
 export {
   queryByTestId,
