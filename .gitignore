@@ -53,3 +53,10 @@ Thumbs.db
 # TypeScript
 *.tsbuildinfo
 next-env.d.ts
+
+# Public assets (except specific examples)
+/public/assets/
+
+# Slides (except example)
+/public/slides/*
+!/public/slides/00-example.md
