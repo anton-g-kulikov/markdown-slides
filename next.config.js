@@ -42,10 +42,13 @@ const nextConfig = {
     esmExternals: "loose",
   },
   output: "export",
+  distDir: "out",
   swcMinify: true,
   images: {
     unoptimized: true, // Required for static export
   },
+  // Disable API routes for static export
+  rewrites: () => Promise.resolve([]),
 };
 
 module.exports = nextConfig;
