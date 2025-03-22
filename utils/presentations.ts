@@ -8,37 +8,38 @@ export interface Presentation {
 }
 
 export function getPresentations(): Presentation[] {
-  // Path to slides directory
-  const slidesDirectory = path.join(process.cwd(), "public", "slides");
+  const slidesDirectory = path.join(process.cwd(), "public/slides");
 
-  // Check if directory exists
   if (!fs.existsSync(slidesDirectory)) {
     return [];
   }
 
-  // Get all markdown files
-  const files = fs
-    .readdirSync(slidesDirectory)
-    .filter((file) => file.endsWith(".md"));
+  try {
+    const fileNames = fs.readdirSync(slidesDirectory);
 
-  return files.map((file) => {
-    const slug = file.replace(/\.md$/, "");
+    const presentations = fileNames
+      .filter((fileName) => fileName.endsWith(".md"))
+      .map((fileName) => {
+        const slug = fileName.replace(/\.md$/, "");
+        const fullPath = path.join(slidesDirectory, fileName);
 
-    // Read the first line of the file to extract title
-    const filePath = path.join(slidesDirectory, file);
-    const content = fs.readFileSync(filePath, "utf8");
-    const firstLine = content.split("\n")[0];
+        // Read markdown file
+        const fileContents = fs.readFileSync(fullPath, "utf8");
 
-    // Extract title from markdown heading or use slug as fallback
-    let title = slug;
-    if (firstLine.startsWith("# ")) {
-      title = firstLine.substring(2).trim();
-    }
+        // Extract title from markdown content
+        const titleMatch = fileContents.match(/^#\s+(.+)/m);
+        const title = titleMatch ? titleMatch[1] : slug;
 
-    return {
-      slug,
-      title,
-      path: `/slides/${slug}`,
-    };
-  });
+        return {
+          slug,
+          title,
+          path: `/slides/${slug}`,
+        };
+      });
+
+    return presentations;
+  } catch (error) {
+    console.error("Error reading slides directory:", error);
+    return [];
+  }
 }

@@ -1,29 +1,15 @@
-// Explicitly import Jest DOM and Jest matchers
 import "@testing-library/jest-dom/extend-expect";
-import { NextApiRequest, NextApiResponse } from "next";
-import handler from "../../pages/api/presentations";
 import fs from "fs";
 import path from "path";
+import { getPresentations } from "../../utils/presentations";
 import { describe, it, expect, beforeEach, vi } from "vitest";
 
 // Mock the fs and path modules
 vi.mock("fs");
 vi.mock("path");
 
-describe("Presentations API", () => {
-  let req: Partial<NextApiRequest>;
-  let res: Partial<NextApiResponse> & {
-    json: ReturnType<typeof vi.fn>;
-    status: ReturnType<typeof vi.fn>;
-  };
-
+describe("Presentations Utility", () => {
   beforeEach(() => {
-    req = {};
-    res = {
-      status: vi.fn().mockReturnThis(),
-      json: vi.fn(),
-    };
-
     vi.clearAllMocks();
 
     // Default mocks
@@ -51,38 +37,32 @@ describe("Presentations API", () => {
       }
     );
 
-    await handler(req as NextApiRequest, res as unknown as NextApiResponse);
+    const presentations = getPresentations();
 
-    expect(res.json).toHaveBeenCalledWith({
-      presentations: [
-        {
-          slug: "intro-to-react",
-          title: "Introduction to React",
-          path: "/slides/intro-to-react",
-        },
-        {
-          slug: "advanced-typescript",
-          title: "Advanced TypeScript",
-          path: "/slides/advanced-typescript",
-        },
-      ],
-    });
+    expect(presentations).toEqual([
+      {
+        slug: "intro-to-react",
+        title: "Introduction to React",
+        path: "/slides/intro-to-react",
+      },
+      {
+        slug: "advanced-typescript",
+        title: "Advanced TypeScript",
+        path: "/slides/advanced-typescript",
+      },
+    ]);
   });
 
   it("should return empty list when directory doesn't exist", async () => {
     (fs.existsSync as ReturnType<typeof vi.fn>).mockReturnValue(false);
-
-    await handler(req as NextApiRequest, res as unknown as NextApiResponse);
-
-    expect(res.json).toHaveBeenCalledWith({ presentations: [] });
+    const presentations = getPresentations();
+    expect(presentations).toEqual([]);
   });
 
   it("should return empty list when directory is empty", async () => {
     (fs.readdirSync as ReturnType<typeof vi.fn>).mockReturnValue([]);
-
-    await handler(req as NextApiRequest, res as unknown as NextApiResponse);
-
-    expect(res.json).toHaveBeenCalledWith({ presentations: [] });
+    const presentations = getPresentations();
+    expect(presentations).toEqual([]);
   });
 
   it("should handle files without titles properly", async () => {
@@ -92,16 +72,14 @@ describe("Presentations API", () => {
       "Content without a title"
     );
 
-    await handler(req as NextApiRequest, res as unknown as NextApiResponse);
+    const presentations = getPresentations();
 
-    expect(res.json).toHaveBeenCalledWith({
-      presentations: [
-        {
-          slug: "no-title",
-          title: "no-title", // Changed from "No Title" to match the actual implementation
-          path: "/slides/no-title",
-        },
-      ],
-    });
+    expect(presentations).toEqual([
+      {
+        slug: "no-title",
+        title: "no-title",
+        path: "/slides/no-title",
+      },
+    ]);
   });
 });
