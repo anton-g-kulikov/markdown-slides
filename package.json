@@ -1,6 +1,6 @@
 {
-  "name": "vibecoding-slides",
-  "version": "0.1.0",
+  "name": "markdown-slides",
+  "version": "0.9.3",
   "private": true,
   "scripts": {
     "dev": "next dev",
