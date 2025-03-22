@@ -26,7 +26,6 @@
 # Firebase
 .firebase/
 firebase-debug.log
-firebaserc
 firebase.json
 firebase-service-account.json
 
@@ -60,3 +59,10 @@ next-env.d.ts
 # Slides (except example)
 /public/slides/*
 !/public/slides/00-example.md
+
+# Firebase specific files with credentials
+.firebaserc
+.env.example
+firebase-service-account.json
+
+# Keep .stylelintrc.js and .git-setup.sh as they're useful for all contributors
