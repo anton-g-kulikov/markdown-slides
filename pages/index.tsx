@@ -53,7 +53,7 @@ export default function Home({ presentations }: HomeProps) {
                   key={presentation.slug}
                   className="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 cursor-pointer transition border border-gray-700 hover:border-blue-500"
                   onClick={() => router.push(presentation.path)}
-                  data-cy={`presentation-item-${presentation.slug}`}
+                  data-cy="presentation-card" // Changed to match E2E tests
                 >
                   <h3
                     className="text-xl font-semibold text-blue-300"

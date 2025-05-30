@@ -39,16 +39,15 @@ const nextConfig = {
   },
   // Add support for ESM modules
   experimental: {
-    esmExternals: "loose",
+    // esmExternals: "loose", // Removed based on warning
   },
-  output: "export",
-  distDir: "out",
-  swcMinify: true,
+  // output: "export", // Removed to enable dynamic features and API routes
+  // distDir: "out", // Removed as it's related to output: "export"
+  // swcMinify: true, // Removed due to "Unrecognized key" error
   images: {
-    unoptimized: true, // Required for static export
+    // unoptimized: true, // No longer needed if not using output: "export"
   },
-  // Disable API routes for static export
-  rewrites: () => Promise.resolve([]),
+  // rewrites: () => Promise.resolve([]), // Removed to allow default behavior
 };
 
 module.exports = nextConfig;
