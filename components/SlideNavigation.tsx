@@ -22,7 +22,7 @@ const SlideNavigation: React.FC<SlideNavigationProps> = ({
         onClick={goToPreviousSlide}
         disabled={currentSlideIndex === 0}
         className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition disabled:bg-gray-600 disabled:cursor-not-allowed"
-        data-cy="prev-slide"
+        data-cy="prev-slide-btn"
       >
         Previous
       </button>
@@ -39,7 +39,7 @@ const SlideNavigation: React.FC<SlideNavigationProps> = ({
         onClick={goToNextSlide}
         disabled={currentSlideIndex === totalSlides - 1}
         className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition disabled:bg-gray-600 disabled:cursor-not-allowed"
-        data-cy="next-slide"
+        data-cy="next-slide-btn"
       >
         Next
       </button>

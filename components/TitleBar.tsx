@@ -21,7 +21,7 @@ const TitleBar: React.FC<TitleBarProps> = ({ title }) => {
       <button
         onClick={goHome}
         className="absolute left-4 px-3 py-1 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition"
-        data-cy="home-button"
+        data-cy="home-btn"
         data-testid="home-button"
       >
         <svg
