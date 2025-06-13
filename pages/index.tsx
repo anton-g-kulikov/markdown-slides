@@ -28,7 +28,15 @@ export default function Home({ presentations }: HomeProps) {
           Welcome to Markdown Slides
         </h1>
         <p className="text-xl mb-12 text-gray-300 text-center">
-          Turn your .md files into nice and simple presentations
+          Turn your .md files into nice and simple presentations. Clone on{" "}
+          <a
+            href="https://github.com/anton-g-kulikov/markdown-slides"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-400 underline"
+          >
+            GitHub
+          </a> ⭐︎
         </p>
 
         <div className="w-full max-w-4xl" data-cy="presentations-container">
