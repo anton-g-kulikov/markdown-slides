@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: "export", // Added for static export
   reactStrictMode: true,
   typescript: {
     // Fail the build if there are type errors
@@ -45,7 +46,7 @@ const nextConfig = {
   // distDir: "out", // Removed as it's related to output: "export"
   // swcMinify: true, // Removed due to "Unrecognized key" error
   images: {
-    // unoptimized: true, // No longer needed if not using output: "export"
+    unoptimized: true, // Added for static export
   },
   // rewrites: () => Promise.resolve([]), // Removed to allow default behavior
 };
