@@ -6,6 +6,10 @@ A modern slide presentation platform built with Next.js, designed for creating a
 
 Markdown Slides allows developers and educators to create engaging slide presentations that can include live code examples, interactive elements, and seamless navigation. Built with modern web technologies for optimal performance and user experience.
 
+## Demo
+
+Check out the live demo of the slides [here](https://markdown-slides-7099a.web.app).
+
 ## Features
 
 - Interactive presentation creation
@@ -174,6 +178,7 @@ When viewing a presentation:
 - Use the "Next" and "Previous" buttons to navigate between slides
 - The current slide position is displayed (e.g., "2 / 10")
 - Use keyboard shortcuts: Right Arrow/Space (next slide) and Left Arrow (previous slide)
+
 
 ## Codebase Structure
 
