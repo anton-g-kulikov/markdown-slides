@@ -8,7 +8,7 @@ Markdown Slides allows developers and educators to create engaging slide present
 
 ## Demo
 
-Check out the live demo of the slides [here](https://markdown-slides-7099a.web.app).
+Check out the live demo of the slides [here](https://markdown-slides-app.web.app).
 
 ## Features
 
