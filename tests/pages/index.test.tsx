@@ -84,14 +84,9 @@ describe("HomePage", () => {
     const reactItem = screen.getByText("Introduction to React").closest("li");
     const tsItem = screen.getByText("Advanced TypeScript").closest("li");
 
-    expect(reactItem).toHaveAttribute(
-      "data-cy",
-      "presentation-item-intro-to-react"
-    );
-    expect(tsItem).toHaveAttribute(
-      "data-cy",
-      "presentation-item-advanced-typescript"
-    );
+    // The E2E tests select cards by this shared attribute.
+    expect(reactItem).toHaveAttribute("data-cy", "presentation-card");
+    expect(tsItem).toHaveAttribute("data-cy", "presentation-card");
   });
 
   it("should navigate to presentation when card is clicked", async () => {

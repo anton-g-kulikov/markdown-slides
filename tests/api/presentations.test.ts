@@ -1,12 +1,18 @@
 import "@testing-library/jest-dom/extend-expect";
 import fs from "fs";
-import path from "path";
 import { getPresentations } from "../../utils/presentations";
 import { describe, it, expect, beforeEach, vi } from "vitest";
 
-// Mock the fs and path modules
-vi.mock("fs");
-vi.mock("path");
+// utils/presentations uses the default fs import, which vi.mock("fs")
+// alone doesn't replace, so mock both the default and named exports.
+vi.mock("fs", () => {
+  const mocked = {
+    existsSync: vi.fn(),
+    readdirSync: vi.fn(),
+    readFileSync: vi.fn(),
+  };
+  return { default: mocked, ...mocked };
+});
 
 describe("Presentations Utility", () => {
   beforeEach(() => {
@@ -14,9 +20,6 @@ describe("Presentations Utility", () => {
 
     // Default mocks
     (fs.existsSync as ReturnType<typeof vi.fn>).mockReturnValue(true);
-    (path.join as ReturnType<typeof vi.fn>).mockImplementation((...args) =>
-      args.join("/")
-    );
   });
 
   it("should return presentations list when files exist", async () => {
