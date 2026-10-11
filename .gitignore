@@ -26,7 +26,6 @@
 # Firebase
 .firebase/
 firebase-debug.log
-firebase.json
 firebase-service-account.json
 
 # Debug
@@ -61,7 +60,6 @@ next-env.d.ts
 !/public/slides/00-example.md
 
 # Firebase specific files with credentials
-.firebaserc
 .env.example
 firebase-service-account.json
 

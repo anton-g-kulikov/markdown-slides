@@ -130,6 +130,17 @@ npm run test:coverage
 
 This will output a detailed coverage report showing which parts of the codebase are well-tested and which might need additional test coverage.
 
+## Deployment
+
+The demo is hosted on Firebase Hosting in the `markdown-slides-app` project
+(`.firebaserc`). `firebase.json` serves the static export from `out/` and
+rewrites `/slides/*` to the client-rendered slide page.
+
+```
+npm run build
+firebase deploy --only hosting
+```
+
 ## Creating Presentations
 
 ### File Structure
