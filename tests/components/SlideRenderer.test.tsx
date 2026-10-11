@@ -19,7 +19,11 @@ vi.mock("next/router", () => ({
 vi.mock("../../components/Markdown", () => {
   return {
     __esModule: true,
-    default: (props) => (
+    default: (props: {
+      content?: string;
+      markdown?: string;
+      children?: React.ReactNode;
+    }) => (
       <div data-testid="markdown-content">
         {props.content || props.markdown || props.children || ""}
       </div>

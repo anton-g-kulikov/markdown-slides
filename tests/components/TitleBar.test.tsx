@@ -44,7 +44,7 @@ describe("TitleBar", () => {
   });
 
   it("applies the correct styling and attributes", async () => {
-    let container;
+    let container!: HTMLElement;
     await act(async () => {
       const renderResult = render(<TitleBar title="Test Title" />);
       container = renderResult.container;

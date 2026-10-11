@@ -51,11 +51,11 @@ console.log(hello);
 
     await waitFor(() => {
       const task1Elements = screen.queryAllByText((_, element) =>
-        element?.textContent.replace(/\s+/g, " ").trim().includes("Task 1")
+        (element?.textContent ?? "").replace(/\s+/g, " ").trim().includes("Task 1")
       );
       expect(task1Elements.length).toBeGreaterThan(0);
       const task2Elements = screen.queryAllByText((_, element) =>
-        element?.textContent
+        (element?.textContent ?? "")
           .replace(/\s+/g, " ")
           .trim()
           .includes("Task 2 (completed)")
